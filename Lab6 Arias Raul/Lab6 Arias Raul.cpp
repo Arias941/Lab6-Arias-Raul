@@ -201,3 +201,102 @@ public:
         }
     }
 };
+
+int main() {
+    Stack stack;
+    Queue queue;
+    Matrix mat1, mat2, matResult;
+
+    int option = 0;
+    while (option != 12) {
+        cout << "\n--- MAIN MENU ---" << endl;
+        cout << "1. Push to Stack" << endl;
+        cout << "2. Pop from Stack" << endl;
+        cout << "3. Enqueue to Queue" << endl;
+        cout << "4. Dequeue from Queue" << endl;
+        cout << "5. Search value in Stack" << endl;
+        cout << "6. Count occurrences in Stack" << endl;
+        cout << "7. Sort copy of Stack (keeps original)" << endl;
+        cout << "8. Print Stack and Queue" << endl;
+        cout << "9. Fill and display Matrices" << endl;
+        cout << "10. Multiply Matrices" << endl;
+        cout << "11. Display total Containers created" << endl;
+        cout << "12. Exit" << endl;
+        cout << "Option: ";
+        cin >> option;
+
+        if (option == 1) {
+            int val;
+            cout << "Enter value: ";
+            cin >> val;
+            stack.push(val);
+        }
+        else if (option == 2) {
+            int val = stack.pop();
+            if (val != -1) cout << "Extracted value from Stack: " << val << endl;
+        }
+        else if (option == 3) {
+            int val;
+            cout << "Enter value: ";
+            cin >> val;
+            queue.enqueue(val);
+        }
+        else if (option == 4) {
+            int val = queue.dequeue();
+            if (val != -1) cout << "Extracted value from Queue: " << val << endl;
+        }
+        else if (option == 5) {
+            int val;
+            cout << "Value to search in Stack: ";
+            cin >> val;
+            int idx = stack.search(val);
+            if (idx != -1) cout << "Found at index: " << idx << endl;
+            else cout << "Not found." << endl;
+        }
+        else if (option == 6) {
+            int val;
+            cout << "Value to count: ";
+            cin >> val;
+            cout << "Occurrences: " << stack.countOccurrences(val) << endl;
+        }
+        else if (option == 7) {
+            Container sortedStack = stack;
+            sortedStack.sort();
+            cout << "Original Stack: ";
+            stack.print();
+            cout << "Sorted Copy: ";
+            sortedStack.print();
+        }
+        else if (option == 8) {
+            cout << "Current Stack: ";
+            stack.print();
+            cout << "Current Queue: ";
+            queue.print();
+        }
+        else if (option == 9) {
+            cout << "Initializing Matrix 1..." << endl;
+            mat1.setValue(0, 0, 1); mat1.setValue(0, 1, 2); mat1.setValue(0, 2, 3);
+            mat1.setValue(1, 0, 4); mat1.setValue(1, 1, 5); mat1.setValue(1, 2, 6);
+            mat1.setValue(2, 0, 7); mat1.setValue(2, 1, 8); mat1.setValue(2, 2, 9);
+
+            cout << "Initializing Matrix 2 (Identity)..." << endl;
+            mat2.setValue(0, 0, 1); mat2.setValue(0, 1, 0); mat2.setValue(0, 2, 0);
+            mat2.setValue(1, 0, 0); mat2.setValue(1, 1, 1); mat2.setValue(1, 2, 0);
+            mat2.setValue(2, 0, 0); mat2.setValue(2, 1, 0); mat2.setValue(2, 2, 1);
+
+            cout << "Matrix 1:" << endl; mat1.print();
+            cout << "Matrix 1 Sum: " << mat1.sum() << endl;
+            cout << "Matrix 1 Row 0 Sum: " << mat1.sumRow(0) << endl;
+        }
+        else if (option == 10) {
+            mat1.multiply(mat2, matResult);
+            cout << "Result of Matrix 1 x Matrix 2:" << endl;
+            matResult.print();
+        }
+        else if (option == 11) {
+            cout << "Total containers instantiated: " << Container::getContainerCount() << endl;
+        }
+    }
+
+    return 0;
+}
